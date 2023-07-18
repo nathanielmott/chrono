@@ -669,6 +669,25 @@ pub const Zulu = create("Zulu", 0);
 //pub fn get(name: []const u8) ?*const Timezone {
 //    return ALL_TIMEZONES.getValue(name);
 //}
+pub fn get_system_timezone(allocator: std.mem.Allocator) !Timezone {
+    const system_time = std.time.timestamp();
+    const tzfile = try std.fs.cwd().openFile("/etc/localtime", .{});
+    const timezones = try std.Tz.parse(allocator, tzfile.reader());
+    var current_timetype: std.tz.Timetype = undefined;
+
+    for (timezones.transitions, 0..) |transition, idx| {
+        if (transition.ts > 0 and system_time < transition.ts) {
+            current_timetype = timezones.transitions[idx - 1].timetype.*;
+            break;
+        }
+    }
+
+    const name = current_timetype.name();
+    const offset: i16 = @intCast(@divFloor(current_timetype.offset, std.time.s_per_hour));
+
+    const System = Timezone.create(name, offset);
+    return System;
+}
 
 test "timezone-get" {
     const testing = std.testing;
