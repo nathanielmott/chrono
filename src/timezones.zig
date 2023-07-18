@@ -683,7 +683,7 @@ pub fn get_system_timezone(allocator: std.mem.Allocator) !Timezone {
     }
 
     const name = current_timetype.name();
-    const offset: i16 = @intCast(@divFloor(current_timetype.offset, std.time.s_per_hour));
+    const offset: i16 = @intCast(@divFloor(current_timetype.offset, std.time.s_per_min));
 
     const System = Timezone.create(name, offset);
     return System;
