@@ -1,6 +1,6 @@
-id: n38mz4rz4uevkcmgj6rdel6ibvnxeckhzbx6pgbyvmdwq14i
-name: datetime
+id: 
+name: chrono
 main: src/main.zig
 license: MIT
-description: A date and time module for Zig.
-dependencies:
+description: A fork of zig-datetime with DST support and the ability to get the system timezone.
+dependencies: zigwin32

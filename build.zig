@@ -15,10 +15,16 @@ pub fn build(b: *std.Build) void {
     // set a preferred release mode, allowing the user to decide how to optimize.
     const optimize = b.standardOptimizeOption(.{});
 
-    _ = b.addModule("zig-datetime", .{ .source_file = .{ .path = "src/main.zig" } });
+    _ = b.addModule("chrono", .{ .source_file = .{ .path = "src/main.zig" } });
+
+    const windows_module = b.createModule(.{
+        .source_file = .{ .path = "lib/zigwin32/main.zig" },
+    });
+
+    _ = windows_module;
 
     const lib = b.addStaticLibrary(.{
-        .name = "zig-datetime",
+        .name = "chrono",
         // In this case the main source file is merely a path, however, in more
         // complicated build scripts, this could be a generated file.
         .root_source_file = .{ .path = "src/main.zig" },
