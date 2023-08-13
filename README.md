@@ -3,6 +3,8 @@
 
 A fork of the zig-datetime module that supports DST by fetching the local system time on Unix-like operating systems. 
 
+The dependency on zigwin32 is intended to add similar timezone-fetching capabilities on Windows machines, but I do not want to mess with converting the type returned from `DYNAMIC_TIME_ZONE_INFORMATION` to the type required for timezone names at the moment.PRs implementing this functionality would be more than welcome.
+
 
 
 ```zig
