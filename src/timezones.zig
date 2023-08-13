@@ -5,6 +5,7 @@
 // -------------------------------------------------------------------------- //
 
 const std = @import("std");
+const zigwin32 = @import("zigwin32");
 
 const Timezone = @import("datetime.zig").Timezone;
 const create = Timezone.create;
