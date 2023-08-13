@@ -17,11 +17,9 @@ pub fn build(b: *std.Build) void {
 
     _ = b.addModule("chrono", .{ .source_file = .{ .path = "src/main.zig" } });
 
-    const windows_module = b.createModule(.{
+    const zigwin32_module = b.createModule(.{
         .source_file = .{ .path = "lib/zigwin32/main.zig" },
     });
-
-    _ = windows_module;
 
     const lib = b.addStaticLibrary(.{
         .name = "chrono",
@@ -36,6 +34,8 @@ pub fn build(b: *std.Build) void {
     // location when the user invokes the "install" step (the default step when
     // running `zig build`).
     b.installArtifact(lib);
+
+    lib.addModule("zigwin32", zigwin32_module);
 
     // Creates a step for unit testing.
     const main_tests = b.addTest(.{

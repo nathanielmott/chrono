@@ -1,7 +1,7 @@
-# Zig Datetime
+# Chrono
 
 
-A fork of the zig-datetime module that supports DST by fetching the local system time on Unix-like operating systems as well as Windows. 
+A fork of the zig-datetime module that supports DST by fetching the local system time on Unix-like operating systems. 
 
 
 
